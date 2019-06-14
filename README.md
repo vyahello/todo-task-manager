@@ -1,6 +1,12 @@
 # Todo task master
 A simple todo task application written in _flask_ python micro-web framework.
 
+# Run application
+Run script from the root directory of the project:
+```bash
+python app.py
+```
+
 # Contributing
 
 - clone the repository
