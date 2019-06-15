@@ -1,4 +1,4 @@
-"""This module provides API to work with applications."""
+"""A module provides API to work with applications."""
 from abc import ABC, abstractmethod
 from enum import Enum
 from typing import Any
@@ -37,11 +37,11 @@ class Application(ABC):
     @property
     @abstractmethod
     def engine(self) -> Flask:
-        """Returns web engine of an application"""
+        """Returns web engine of an application."""
         pass
 
     @abstractmethod
-    def run(self, host: str, port: str, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
+    def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
         """Runs an application."""
         pass
 
@@ -54,9 +54,11 @@ class CustomApplication(Application):
 
     @property
     def engine(self) -> Flask:
+        """Returns web engine of a custom application."""
         return self._engine
 
-    def run(self, host: str, port: str, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
+    def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
+        """Runs a custom application."""
         self._engine.run(host, port, debug, load_dot_env, **options)
 
 
@@ -68,7 +70,9 @@ class Todo(Application):
 
     @property
     def engine(self) -> Flask:
+        """Returns web engine of a `to-do` application."""
         return self._application.engine
 
-    def run(self, host: str, port: str, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
+    def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
+        """Runs a `to-do` application."""
         self._application.run(host, port, debug, load_dot_env, **options)

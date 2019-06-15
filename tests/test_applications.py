@@ -13,10 +13,7 @@ def todo() -> Application:
     return Todo()
 
 
-@pytest.mark.parametrize("route, result", [
-    ("root", "/"),
-    ("home", "index.html")
-])
+@pytest.mark.parametrize("route, result", [("root", "/"), ("home", "index.html")])
 def test_route_from_str(route: str, result: str) -> None:
     assert Route.from_str(route) == result
 
