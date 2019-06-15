@@ -1,6 +1,8 @@
 # Todo task master
 A simple todo task application written in _flask_ python micro-web framework.
 
+[![Build Status](https://travis-ci.org/vyahello/todo-task-manager.svg?branch=master)](https://travis-ci.org/vyahello/todo-task-manager)
+
 # Run application
 Run script from the root directory of the project:
 ```bash
@@ -9,10 +11,11 @@ python todo.py
 
 # Run static code analysis
 In general static code analysis consists of following tools: `black`, `flake8`, `pylint`, `mypy`, `pydocstyle` and `unittests` accordingly.
-To be able to start static code analysis please run following script from the root directory of the project:
+To be able to start static code analysis _locally_ please run following script from the root directory of the project:
 ```bash
 ./run-code-analysis.sh
 ```
+Anyway, this script is triggered via `Travis CI` .
 
 # Contributing
 
