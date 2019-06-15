@@ -1,3 +1,4 @@
+"""This module provide entrypoint API to run `to-do` task manager application."""
 from abc import ABC, abstractmethod
 from enum import Enum
 from typing import Any
@@ -44,8 +45,8 @@ class Application(ABC):
         pass
 
 
-class Todo(Application):
-    """The class represents."""
+class CustomApplication(Application):
+    """The class represents a custom application."""
     
     def __init__(self, name: str) -> None:
         self._engine: Flask = Flask(name)
@@ -58,16 +59,30 @@ class Todo(Application):
         self._engine.run(host, port, debug, load_dot_env, **options)
 
 
-def _run_todo_task_manager(host: str = "localhost", port: str = "7777") -> None:
+class Todo(Application):
+    """The class represents a `to-do` application."""
+
+    def __init__(self) -> None:
+        self._application: Application = CustomApplication(__name__)
+
+    @property
+    def engine(self) -> Flask:
+        return self._application.engine
+
+    def run(self, host: str, port: str, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
+        self._application.run(host, port, debug, load_dot_env, **options)
+
+
+def _run_todo_task_manager() -> None:
     """Runs `to-do` task manager application"""
-    todo: Application = Todo(name=__name__)
+    todo: Application = Todo()
 
     @todo.engine.route(Route.from_str("root"))
     def index():
         """Returns an index page of an application."""
         return render_template(Route.from_str("home"))
 
-    todo.run(host, port)
+    todo.run(host="0.0.0.0", port="7777")
 
 
 if __name__ == "__main__":
