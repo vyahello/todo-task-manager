@@ -7,6 +7,7 @@ from flask import Flask, render_template
 
 class ApplicationError(Exception):
     """Raises error occurred in an application."""
+
     pass
 
 
@@ -38,7 +39,7 @@ class Application(ABC):
     def engine(self) -> Flask:
         """Returns web engine of an application"""
         pass
-    
+
     @abstractmethod
     def run(self, host: str, port: str, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
         """Runs an application."""
@@ -47,14 +48,14 @@ class Application(ABC):
 
 class CustomApplication(Application):
     """The class represents a custom application."""
-    
+
     def __init__(self, name: str) -> None:
         self._engine: Flask = Flask(name)
 
     @property
     def engine(self) -> Flask:
         return self._engine
-    
+
     def run(self, host: str, port: str, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
         self._engine.run(host, port, debug, load_dot_env, **options)
 
