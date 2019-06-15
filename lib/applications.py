@@ -1,3 +1,4 @@
+"""This module provides API to work with applications."""
 from abc import ABC, abstractmethod
 from enum import Enum
 from typing import Any

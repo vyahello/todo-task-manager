@@ -1,4 +1,4 @@
-"""This module provide entrypoint API to run `to-do` task manager application."""
+"""This module provides entrypoint API to run `to-do` task manager application."""
 from flask import render_template
 from lib.applications import Route, Application, Todo
 
