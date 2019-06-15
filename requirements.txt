@@ -6,3 +6,4 @@ black
 pylint
 mypy
 pydocstyle
+python-coveralls

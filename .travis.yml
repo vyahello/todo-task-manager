@@ -2,5 +2,7 @@ language: python
 python: "3.6"
 script:
     - ./run-code-analysis.sh
+after_success:
+  - coveralls push
 notifications:
   email: false
