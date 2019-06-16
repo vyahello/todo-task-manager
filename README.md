@@ -14,7 +14,7 @@ python todo.py
 In general static code analysis consists of following tools: `black`, `flake8`, `pylint`, `mypy`, `pydocstyle` and `unittests` accordingly.
 To be able to start static code analysis _locally_ please run following script from the root directory of the project:
 ```bash
-./run-code-analysis.sh
+./run-code-analysis.sh install-dependencies
 ```
 Anyway, this script is triggered via `Travis CI` .
 
@@ -27,3 +27,4 @@ Anyway, this script is triggered via `Travis CI` .
   git config --local user.email "vyahello@gmail.com"
   ```
 - `python3.6` is required to run the code
+- `pip install -r requirements` to install all project dependencies

@@ -1,9 +1,2 @@
-flask
-flask-sqlalchemy
-pytest
-flake8
-black
-pylint
-mypy
-pydocstyle
-python-coveralls
+flask==1.0.3
+flask-sqlalchemy==2.4.0

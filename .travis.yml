@@ -1,8 +1,8 @@
 language: python
-python: "3.6"
+python: "3.6.5"
 script:
-    - ./run-code-analysis.sh
+    - ./run-code-analysis.sh install-dependencies
 after_success:
-  - coveralls push
+  - coveralls
 notifications:
   email: false

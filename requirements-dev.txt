@@ -1,0 +1,9 @@
+flask==1.0.3
+pytest==4.6.3
+pytest-cov==2.5.1
+flake8==3.7.7
+black==18.9b0
+pylint==2.3.1
+mypy==0.701
+pydocstyle==3.0.0
+coveralls==1.8.1
