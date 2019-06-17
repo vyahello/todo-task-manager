@@ -71,7 +71,7 @@ class CustomApplication(Application):
 
     def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
         """Runs a custom application."""
-        self._engine.run(host, port, debug, load_dot_env, **options)
+        return self._engine.run(host, port, debug, load_dot_env, **options)
 
     def config(self, database_name: str) -> None:
         """Setup a custom application config."""
