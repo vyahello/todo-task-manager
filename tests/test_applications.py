@@ -1,23 +1,21 @@
 import pytest
 from flask import Flask
-from lib.applications import ApplicationError, Route, Application, CustomApplication, Todo, TodoSetup
-
-_module_runner: str = "__main__"
+from lib.applications import ApplicationError, Route, Application, CustomApplication, Todo, TodoRequest
 
 
 @pytest.fixture(scope="module")
-def custom() -> Application:
-    return CustomApplication(_module_runner, static_folder="static", template_folder="templates")
+def setup() -> TodoRequest:
+    return TodoRequest()
 
 
 @pytest.fixture(scope="module")
-def todo() -> Application:
-    return Todo(_module_runner)
+def custom(setup: TodoRequest) -> Application:
+    return CustomApplication(setup.module, setup.database)
 
 
 @pytest.fixture(scope="module")
-def setup() -> TodoSetup:
-    return TodoSetup()
+def todo(setup: TodoRequest) -> Application:
+    return Todo(setup)
 
 
 @pytest.mark.parametrize("route, result", [("root", "/"), ("home", "index.html")])
@@ -42,9 +40,9 @@ def test_todo_engine(todo: Application) -> None:
     assert isinstance(todo.engine, Flask)
 
 
-def test_todo_setup_module(setup: TodoSetup) -> None:
-    assert setup.module == _module_runner
+def test_todo_setup_module(setup: TodoRequest) -> None:
+    assert setup.module == "__main__"
 
 
-def test_todo_setup_database(setup: TodoSetup) -> None:
+def test_todo_setup_database(setup: TodoRequest) -> None:
     assert setup.database == "sqlite:///todo.db"

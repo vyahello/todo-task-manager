@@ -11,7 +11,7 @@ class ApplicationError(Exception):
     pass
 
 
-class TodoSetup(NamedTuple):
+class TodoRequest(NamedTuple):
     """The class represents setup for `to-do` application."""
 
     module: str = "__main__"
@@ -48,51 +48,58 @@ class Application(ABC):
         pass
 
     @abstractmethod
-    def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
+    def run(
+        self, host: str = "0.0.0.0", port: int = 5050, debug: bool = False, load_dot_env: bool = True, **options: Any
+    ) -> None:
         """Runs an application."""
         pass
 
     @abstractmethod
-    def config(self, database_name: str) -> None:
-        """Setup an application config."""
+    def setup(self) -> None:
+        """Setups an application config."""
         pass
 
 
 class CustomApplication(Application):
     """The class represents a custom application."""
 
-    def __init__(self, name: str, static_folder: str, template_folder: str) -> None:
-        self._engine: Flask = Flask(import_name=name, static_folder=static_folder, template_folder=template_folder)
+    def __init__(self, module: str, database: str, static_dir: str = "static", template_dir: str = "templates") -> None:
+        self._engine: Flask = Flask(import_name=module, static_folder=static_dir, template_folder=template_dir)
+        self._database: str = database
 
     @property
     def engine(self) -> Flask:
         """Returns web engine of a custom application."""
         return self._engine
 
-    def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
+    def run(
+        self, host: str = "0.0.0.0", port: int = 5050, debug: bool = False, load_dot_env: bool = True, **options: Any
+    ) -> None:
         """Runs a custom application."""
         return self._engine.run(host, port, debug, load_dot_env, **options)
 
-    def config(self, database_name: str) -> None:
-        """Setup a custom application config."""
-        self._engine.config["SQLALCHEMY_DATABASE_URI"] = database_name
+    def setup(self) -> None:
+        """Setups a custom application config."""
+        self._engine.config["SQLALCHEMY_DATABASE_URI"] = self._database
 
 
 class Todo(Application):
     """The class represents a `to-do` application."""
 
-    def __init__(self, name: str) -> None:
-        self._application: Application = CustomApplication(name, static_folder="static", template_folder="templates")
+    def __init__(self, setup: TodoRequest) -> None:
+        self._application: Application = CustomApplication(setup.module, setup.database)
 
     @property
     def engine(self) -> Flask:
         """Returns web engine of a `to-do` application."""
         return self._application.engine
 
-    def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
+    def run(
+        self, host: str = "0.0.0.0", port: int = 5050, debug: bool = False, load_dot_env: bool = True, **options: Any
+    ) -> None:
         """Runs a `to-do` application."""
         self._application.run(host, port, debug, load_dot_env, **options)
 
-    def config(self, database_name: str) -> None:
+    def setup(self) -> None:
         """Setup a `to-do` application config."""
-        self._application.config(database_name)
+        self._application.setup()
