@@ -1,11 +1,13 @@
 """A module provides entrypoint API to run `to-do` task manager application."""
 from flask import render_template
-from lib.applications import Route, Application, Todo
+from lib.applications import TodoSetup, Route, Application, Todo
+
+todo: Application = Todo(str(TodoSetup.module))
 
 
 def _run_todo_task_manager() -> None:
     """Runs `to-do` task manager application."""
-    todo: Application = Todo()
+    todo.config(str(TodoSetup.database))
 
     @todo.engine.route(Route.from_str("root"))
     def index():  # pylint: disable=unused-variable
