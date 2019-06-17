@@ -10,6 +10,9 @@ Run script from the root directory of the project:
 python todo.py
 ```
 
+## Demo
+![Screenshot](static/todo.png)
+
 # Run static code analysis
 In general static code analysis consists of following tools: `black`, `flake8`, `pylint`, `mypy`, `pydocstyle` and `unittests` accordingly.
 To be able to start static code analysis _locally_ please run following script from the root directory of the project:
