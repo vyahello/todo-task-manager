@@ -1,4 +1,10 @@
-body {
-    margin: 0;
-    font-family: sans-serif;
+table {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+th, td {
+  text-align: center;
+  vertical-align: middle;
 }
