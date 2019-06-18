@@ -48,10 +48,14 @@ class Database:
         """Returns a datetime datatype."""
         return self._type
 
-    def add_session(self, model: Model):
+    def add_session(self, model: Model) -> None:
         """Adds new session."""
         self._db.session.add(model)
 
-    def commit_session(self):
+    def commit_session(self) -> None:
         """Commits a session."""
         self._db.session.commit()
+
+    def delete_session(self, model: Model) -> None:
+        """Deletes a session."""
+        self._db.session.delete(model)

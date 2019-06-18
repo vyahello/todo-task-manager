@@ -23,6 +23,7 @@ class Route(Enum):
 
     ROOT: str = "/"
     HOME: str = "index.html"
+    DELETE: str = "/delete/<int:identity>"
 
     @classmethod
     def from_str(cls, route: str) -> str:
@@ -30,7 +31,9 @@ class Route(Enum):
         if route == "root":
             return str(cls.ROOT)
         if route == "home":
-            return str(cls.HOME.value)
+            return str(cls.HOME)
+        if route == "delete":
+            return str(cls.DELETE)
         raise ApplicationError(f'Given "{route}" route is invalid!')
 
     def __str__(self) -> str:
