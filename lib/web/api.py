@@ -3,7 +3,7 @@ from enum import Enum
 from typing import Tuple
 
 
-class ApiMethod(Enum):
+class HttpMethod(Enum):
     """Represents api web methods."""
 
     POST: str = "POST"
@@ -12,8 +12,13 @@ class ApiMethod(Enum):
     DELETE: str = "DELETE"
 
     @classmethod
-    def index(cls) -> Tuple[str, ...]:
+    def for_index(cls) -> Tuple[str, ...]:
         """Index page methods."""
+        return cls.POST.value, cls.GET.value
+
+    @classmethod
+    def for_update(cls) -> Tuple[str, ...]:
+        """Update option methods."""
         return cls.POST.value, cls.GET.value
 
     def __len__(self) -> int:

@@ -18,7 +18,16 @@ def todo(setup: TodoRequest) -> Application:
     return Todo(setup)
 
 
-@pytest.mark.parametrize("route, result", [("root", "/"), ("home", "index.html")])
+@pytest.mark.parametrize(
+    "route, result",
+    [
+        ("root", "/"),
+        ("home_page", "/index.html"),
+        ("delete_id", "/delete/<int:identity>"),
+        ("update_id", "/update/<int:identity>"),
+        ("update_page", "/update.html"),
+    ],
+)
 def test_route_from_str(route: str, result: str) -> None:
     assert Route.from_str(route) == result
 
@@ -26,6 +35,15 @@ def test_route_from_str(route: str, result: str) -> None:
 def test_wrong_route_from_str() -> None:
     with pytest.raises(ApplicationError):
         Route.from_str("N/A")
+
+
+def test_allowed_routes() -> None:
+    assert len(Route.allowed()) == 5
+
+
+def test_wrong_route() -> None:
+    with pytest.raises(KeyError):
+        Route.allowed()["N/A"]
 
 
 def test_str_route() -> None:

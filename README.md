@@ -3,6 +3,7 @@ A simple todo task application written in _flask_ python micro-web framework.
 
 [![Build Status](https://travis-ci.org/vyahello/todo-task-manager.svg?branch=master)](https://travis-ci.org/vyahello/todo-task-manager)
 [![Coverage Status](https://coveralls.io/repos/github/vyahello/todo-task-manager/badge.svg?branch=master)](https://coveralls.io/github/vyahello/todo-task-manager?branch=master)
+
 # Run application
 Run script from the root directory of the project:
 ```bash
@@ -10,7 +11,11 @@ python todo.py
 ```
 
 ## Demo
-![Screenshot](static/todo.png)
+Home Page
+![Screenshot](static/home%20page.png)
+
+Update Task Page
+![Screenshot](static/update%20task.png)
 
 # Run static code analysis
 In general static code analysis consists of following tools: `black`, `flake8`, `pylint`, `mypy`, `pydocstyle` and `unittests` accordingly.

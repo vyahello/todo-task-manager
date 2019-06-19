@@ -1,7 +1,7 @@
 """A module provides API to work with applications."""
 from abc import ABC, abstractmethod
 from enum import Enum
-from typing import Any, NamedTuple
+from typing import Any, NamedTuple, Dict
 from flask import Flask
 
 
@@ -22,19 +22,28 @@ class Route(Enum):
     """The class represents route element."""
 
     ROOT: str = "/"
-    HOME: str = "index.html"
-    DELETE: str = "/delete/<int:identity>"
+    HOME_PAGE: str = "/index.html"
+    DELETE_ID: str = "/delete/<int:identity>"
+    UPDATE_ID: str = "/update/<int:identity>"
+    UPDATE_PAGE: str = "/update.html"
 
     @classmethod
     def from_str(cls, route: str) -> str:
         """Returns route from a string."""
-        if route == "root":
-            return str(cls.ROOT)
-        if route == "home":
-            return str(cls.HOME)
-        if route == "delete":
-            return str(cls.DELETE)
-        raise ApplicationError(f'Given "{route}" route is invalid!')
+        if route not in cls.allowed():
+            raise ApplicationError(f'Given "{route}" route is invalid!')
+        return str(cls.allowed()[route])
+
+    @classmethod
+    def allowed(cls) -> Dict[str, "Route"]:
+        """Returns allowed routes mapping."""
+        return {
+            "root": cls.ROOT,
+            "home_page": cls.HOME_PAGE,
+            "delete_id": cls.DELETE_ID,
+            "update_id": cls.UPDATE_ID,
+            "update_page": cls.UPDATE_PAGE,
+        }
 
     def __str__(self) -> str:
         """Returns string route value."""
@@ -51,9 +60,7 @@ class Application(ABC):
         pass
 
     @abstractmethod
-    def run(
-        self, host: str = "0.0.0.0", port: int = 5050, debug: bool = False, load_dot_env: bool = True, **options: Any
-    ) -> None:
+    def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
         """Runs an application."""
         pass
 
@@ -75,9 +82,7 @@ class CustomApplication(Application):
         """Returns web engine of a custom application."""
         return self._engine
 
-    def run(
-        self, host: str = "0.0.0.0", port: int = 5050, debug: bool = False, load_dot_env: bool = True, **options: Any
-    ) -> None:
+    def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
         """Runs a custom application."""
         return self._engine.run(host, port, debug, load_dot_env, **options)
 
@@ -97,9 +102,7 @@ class Todo(Application):
         """Returns web engine of a `to-do` application."""
         return self._application.engine
 
-    def run(
-        self, host: str = "0.0.0.0", port: int = 5050, debug: bool = False, load_dot_env: bool = True, **options: Any
-    ) -> None:
+    def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
         """Runs a `to-do` application."""
         self._application.run(host, port, debug, load_dot_env, **options)
 
