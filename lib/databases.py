@@ -31,7 +31,7 @@ class Database:
     """Represents a database."""
 
     def __init__(self, application: Application) -> None:
-        self._db: SQLAlchemy = SQLAlchemy(application.engine)
+        self._db: SQLAlchemy = SQLAlchemy(application())
         self._type: _ValueType = _ValueType(self._db)
 
     @property

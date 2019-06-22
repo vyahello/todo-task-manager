@@ -50,12 +50,12 @@ def test_str_route() -> None:
     assert str(Route.ROOT) == "/"
 
 
-def test_custom_engine(custom: Application) -> None:
-    assert isinstance(custom.engine, Flask)
+def test_call_custom(custom: Application) -> None:
+    assert isinstance(custom(), Flask)
 
 
-def test_todo_engine(todo: Application) -> None:
-    assert isinstance(todo.engine, Flask)
+def test_call_todo(todo: Application) -> None:
+    assert isinstance(todo(), Flask)
 
 
 def test_todo_setup_module(setup: TodoRequest) -> None:

@@ -1,8 +1,11 @@
 """A module provides API to work with applications."""
+import os
 from abc import ABC, abstractmethod
 from enum import Enum
 from typing import Any, NamedTuple, Dict
 from flask import Flask
+
+_APP_DIR: str = os.path.abspath(os.path.dirname(__name__))
 
 
 class ApplicationError(Exception):
@@ -13,9 +16,10 @@ class ApplicationError(Exception):
 
 class TodoRequest(NamedTuple):
     """The class represents setup for `to-do` application."""
-
     module: str = "__main__"
-    database: str = "sqlite:///todo.db"
+    database: str = f"sqlite:///{_APP_DIR}/todo.db"
+    static_dir: str = f"{_APP_DIR}/static"
+    template_dir: str = f"{_APP_DIR}/templates"
 
 
 class Route(Enum):
@@ -53,12 +57,6 @@ class Route(Enum):
 class Application(ABC):
     """The class represents an abstract application."""
 
-    @property
-    @abstractmethod
-    def engine(self) -> Flask:
-        """Returns web engine of an application."""
-        pass
-
     @abstractmethod
     def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
         """Runs an application."""
@@ -69,6 +67,11 @@ class Application(ABC):
         """Setups an application config."""
         pass
 
+    @abstractmethod
+    def __call__(self, *args: Any, **kwargs) -> Flask:
+        """Calls an application."""
+        pass
+
 
 class CustomApplication(Application):
     """The class represents a custom application."""
@@ -76,11 +79,6 @@ class CustomApplication(Application):
     def __init__(self, module: str, database: str, static_dir: str = "static", template_dir: str = "templates") -> None:
         self._engine: Flask = Flask(import_name=module, static_folder=static_dir, template_folder=template_dir)
         self._database: str = database
-
-    @property
-    def engine(self) -> Flask:
-        """Returns web engine of a custom application."""
-        return self._engine
 
     def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
         """Runs a custom application."""
@@ -90,17 +88,18 @@ class CustomApplication(Application):
         """Setups a custom application config."""
         self._engine.config["SQLALCHEMY_DATABASE_URI"] = self._database
 
+    def __call__(self, *args: Any, **kwargs: Any) -> Flask:
+        """Calls a custom application."""
+        return self._engine
+
 
 class Todo(Application):
     """The class represents a `to-do` application."""
 
     def __init__(self, setup: TodoRequest) -> None:
-        self._application: Application = CustomApplication(setup.module, setup.database)
-
-    @property
-    def engine(self) -> Flask:
-        """Returns web engine of a `to-do` application."""
-        return self._application.engine
+        self._application: Application = CustomApplication(
+            setup.module, setup.database, setup.static_dir, setup.template_dir
+        )
 
     def run(self, host: str, port: int, debug: bool = False, load_dot_env: bool = True, **options: Any) -> None:
         """Runs a `to-do` application."""
@@ -109,3 +108,7 @@ class Todo(Application):
     def setup(self) -> None:
         """Setup a `to-do` application config."""
         self._application.setup()
+
+    def __call__(self, *args: Any, **kwargs) -> Flask:
+        """Calls `to-do` application engine."""
+        return self._application(*args, **kwargs)

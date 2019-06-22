@@ -2,14 +2,14 @@
 from flask import request, redirect, render_template
 from werkzeug.wrappers import Response
 from flask_sqlalchemy import BaseQuery
-from lib import todo_app, database
+from lib import main, database
 from lib.applications import Route
 from lib.models import Content
 from lib.web.api import HttpMethod
 
 
-@todo_app.engine.route(Route.from_str("home_page"))
-@todo_app.engine.route(Route.from_str("root"), methods=HttpMethod.for_index())
+@main.route(Route.from_str("home_page"))
+@main.route(Route.from_str("root"), methods=HttpMethod.for_index())
 def index():
     """Returns an index page of an application."""
     if request.method == HttpMethod.POST.value:
@@ -19,7 +19,7 @@ def index():
     return render_template(Route.from_str("home_page"), tasks=Content.query.order_by(Content.date_created).all())
 
 
-@todo_app.engine.route(Route.from_str("delete_id"))
+@main.route(Route.from_str("delete_id"))
 def delete(identity: int) -> Response:
     """Deletes a task from task manager."""
     database.delete_session(Content.query.get_or_404(identity))
@@ -27,7 +27,7 @@ def delete(identity: int) -> Response:
     return redirect(Route.from_str("root"))
 
 
-@todo_app.engine.route(Route.from_str("update_id"), methods=HttpMethod.for_update())
+@main.route(Route.from_str("update_id"), methods=HttpMethod.for_update())
 def update(identity: int) -> Response:
     """Updates a task."""
     task: BaseQuery = Content.query.get_or_404(identity)
