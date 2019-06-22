@@ -1,6 +1,6 @@
 import pytest
 from flask import Flask
-from lib.applications import ApplicationError, Route, Application, CustomApplication, Todo, TodoRequest
+from lib.applications import _APP_DIR, ApplicationError, Route, Application, CustomApplication, Todo, TodoRequest
 
 
 @pytest.fixture(scope="module")
@@ -63,4 +63,12 @@ def test_todo_setup_module(setup: TodoRequest) -> None:
 
 
 def test_todo_setup_database(setup: TodoRequest) -> None:
-    assert setup.database == "sqlite:///todo.db"
+    assert setup.database == f"sqlite:///{_APP_DIR}/todo.db"
+
+
+def test_todo_setup_static(setup: TodoRequest) -> None:
+    assert setup.static_dir == f"{_APP_DIR}/static"
+
+
+def test_todo_setup_templates(setup: TodoRequest) -> None:
+    assert setup.template_dir == f"{_APP_DIR}/templates"

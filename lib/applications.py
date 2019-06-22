@@ -16,6 +16,7 @@ class ApplicationError(Exception):
 
 class TodoRequest(NamedTuple):
     """The class represents setup for `to-do` application."""
+
     module: str = "__main__"
     database: str = f"sqlite:///{_APP_DIR}/todo.db"
     static_dir: str = f"{_APP_DIR}/static"
