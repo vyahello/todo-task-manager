@@ -1,6 +1,11 @@
-"""A module provides entrypoint API to run `to-do` task manager application."""
-from lib import main
+"""A module provides entrypoint API to run `to-do` task master application."""
+from lib import master
+
+
+def _run_master_application() -> None:
+    """Runs `to-do` task master application."""
+    master.run(host="0.0.0.0", port=7777)
 
 
 if __name__ == "__main__":
-    main.run(host="0.0.0.0", port=7777)
+    _run_master_application()
