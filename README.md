@@ -31,7 +31,7 @@ To be able to start static code analysis _locally_ please run following script f
 ```bash
 ./run-code-analysis.sh install-dependencies
 ```
-Anyway, this script is triggered via `Travis CI` .
+Anyway, this script is triggered via `Travis CI` and `GitHub CI`.
 
 Sample output from _static code analysis_ tool:
 ```bash
