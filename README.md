@@ -1,5 +1,5 @@
 # Todo task master
-A simple todo task application written in _flask_ python micro-web framework. 
+A simple todo task application written in [_flask_](http://flask.palletsprojects.com) python micro-web framework. 
 Please use following link to observe how it looks: https://todo-task-master.herokuapp.com
 
 [![Build Status](https://travis-ci.org/vyahello/todo-task-manager.svg?branch=master)](https://travis-ci.org/vyahello/todo-task-manager)
