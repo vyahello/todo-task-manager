@@ -62,6 +62,12 @@ heroku logs --tail
 ```
 - Open an application via browser: https://todo-task-master.herokuapp.com
 
+## Release notes
+
+* 0.1.1
+    * Enhance documentation
+* 0.1.0
+    * Introduce initial app version
 
 ## Meta
 Author – Volodymyr Yahello vyahello@gmail.com
