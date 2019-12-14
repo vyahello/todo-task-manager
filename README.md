@@ -7,6 +7,7 @@ Please use following link to observe how it looks: https://todo-task-master.hero
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.md)
+[![Hits-of-Code](https://hitsofcode.com/github/vyahello/todo-task-manager)](https://hitsofcode.com/view/github/vyahello/todo-task-manager)
 
 **Tools/features**
 > - `python 3.6`
