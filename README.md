@@ -1,13 +1,16 @@
-# Todo task master
-A simple todo task application written in [_flask_](http://flask.palletsprojects.com) python micro-web framework. 
-Please use following link to observe how it looks: https://todo-task-master.herokuapp.com
-
 [![Build Status](https://travis-ci.org/vyahello/todo-task-manager.svg?branch=master)](https://travis-ci.org/vyahello/todo-task-manager)
 [![Coverage Status](https://coveralls.io/repos/github/vyahello/todo-task-manager/badge.svg?branch=master)](https://coveralls.io/github/vyahello/todo-task-manager?branch=master)
+[![Forks](https://img.shields.io/github/forks/vyahello/todo-task-manager)](https://github.com/vyahello/todo-task-manager/network/members)
+[![Stars](https://img.shields.io/github/stars/vyahello/todo-task-manager)](https://github.com/vyahello/todo-task-manager/stargazers)
+[![Issues](https://img.shields.io/github/issues/vyahello/todo-task-manager)](https://github.com/vyahello/todo-task-manager/issues)
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.md)
 [![Hits-of-Code](https://hitsofcode.com/github/vyahello/todo-task-manager)](https://hitsofcode.com/view/github/vyahello/todo-task-manager)
+
+# Todo task master
+A simple todo task application written in [_flask_](http://flask.palletsprojects.com) python micro-web framework. 
+Please use following link to observe how it looks: https://todo-task-master.herokuapp.com
 
 **Tools/features**
 > - `python 3.6`
