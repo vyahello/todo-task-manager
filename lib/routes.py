@@ -1,4 +1,6 @@
 """A module contains a set of application routes."""
+from typing import Union
+
 from flask import request, redirect, render_template
 from werkzeug.wrappers import Response
 from flask_sqlalchemy import BaseQuery
@@ -16,7 +18,10 @@ def index():
         database.add_session(Content(content=request.form["content"]))
         database.commit_session()
         return redirect(Route.from_str("root"))
-    return render_template(Route.from_str("home_page"), tasks=Content.query.order_by(Content.date_created).all())
+    return render_template(
+        Route.from_str("home_page"),
+        tasks=Content.query.order_by(Content.date_created).all(),
+    )
 
 
 @master.route(Route.from_str("delete_id"))
@@ -28,11 +33,13 @@ def delete(identity: int) -> Response:
 
 
 @master.route(Route.from_str("update_id"), methods=HttpMethod.for_update())
-def update(identity: int) -> Response:
+def update(identity: int) -> Union[str, Response]:
     """Updates a task."""
     task: BaseQuery = Content.query.get_or_404(identity)
     if request.method == "POST":
         task.content = request.form["content"]
         database.commit_session()
         return redirect(Route.from_str("root"))
-    return render_template(Route.from_str("update_page"), task=Content.query.get_or_404(identity))
+    return render_template(
+        Route.from_str("update_page"), task=Content.query.get_or_404(identity)
+    )

@@ -1,6 +1,14 @@
 import pytest
 from flask import Flask
-from lib.applications import _APP_DIR, ApplicationError, Route, Application, CustomApplication, Todo, TodoRequest
+from lib.applications import (
+    _APP_DIR,
+    ApplicationError,
+    Route,
+    Application,
+    CustomApplication,
+    Todo,
+    TodoRequest,
+)
 
 
 @pytest.fixture(scope="module")
