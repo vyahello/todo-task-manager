@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.md)
 
 # Todo task master
-A simple todo task application written in [_flask_](http://flask.palletsprojects.com) python micro-web framework. 
+A simple todo task application written in [flask](http://flask.palletsprojects.com) python micro-web framework. 
 
 ![Screenshot](static/home%20page.png)
 
