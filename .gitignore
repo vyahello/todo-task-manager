@@ -10,6 +10,7 @@ venv
 # Distribution
 .DS_Store
 .cache/
+.coverage
 
 # python identifiers
 .python-version
