@@ -1,4 +1,4 @@
-name: Python package
+name: Python code assessment
 on: [push]
 jobs:
   build:
