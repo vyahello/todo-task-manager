@@ -17,7 +17,7 @@ A simple todo task application written in [flask](http://flask.palletsprojects.c
 
 ### Production
 
-- python 3.7
+- python 3.8
 - [flask](http://flask.palletsprojects.com)
 - html5/css
 - shell
@@ -25,7 +25,7 @@ A simple todo task application written in [flask](http://flask.palletsprojects.c
 
 ### Development
 
-- [travis](https://travis-ci.org/) CI
+- [github actions](https://github.com/vyahello/todo-task-manager/actions/workflows/code-assessment.yml) CI
 - [pytest](https://pypi.org/project/pytest/) framework
 - [black](https://black.readthedocs.io/en/stable/) code formatter
 - [mypy](http://mypy.readthedocs.io/en/latest) static tyler
@@ -37,6 +37,7 @@ A simple todo task application written in [flask](http://flask.palletsprojects.c
 Run script from the root directory of the project:
 ```bash
 git clone git@github.com:vyahello/todo-task-manager.git
+cd todo-task-manager
 pip install -r requirements.txt
 python todo.py
 ```

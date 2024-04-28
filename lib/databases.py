@@ -1,6 +1,7 @@
 """A module provides API to work with databases."""
 from typing import Type
-from flask_sqlalchemy import SQLAlchemy, Model
+from flask_sqlalchemy.extension import SQLAlchemy
+from flask_sqlalchemy.model import Model
 from sqlalchemy import Column, Integer, String, DateTime
 from lib import Application
 
@@ -35,12 +36,12 @@ class Database:
         self._type: _ValueType = _ValueType(self._db)
 
     @property
-    def model(self) -> Model:
+    def model(self) -> Type[Model]:
         """Returns a datetime model."""
         return self._db.Model
 
     @property
-    def column(self) -> Type[Column]:
+    def column(self) -> Type[Column]:  # type: ignore
         """Returns a datetime column."""
         return self._db.Column
 
