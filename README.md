@@ -17,7 +17,7 @@ A simple todo task application written in [flask](http://flask.palletsprojects.c
 
 ### Production
 
-- python 3.6
+- python 3.7
 - [flask](http://flask.palletsprojects.com)
 - html5/css
 - shell
