@@ -42,6 +42,8 @@ pip install -r requirements.txt
 python todo.py
 ```
 
+Then please open `0.0.0.0:7777` in your browser.
+
 ## Development notes
 
 ### Run static code analysis
